@@ -57,7 +57,13 @@ If you want display package vignettes with `utils::vignette()`, install
 `devtools::install_github("NightingaleHealth/ggforestplot",
 build_vignettes = TRUE)`. However, installing with building the
 vignettes takes little bit longer. (Note: If dependencies are not
+
+Conda users can build a local package from the recipe in
+[`conda/recipe`](conda/recipe) with `conda-build conda/recipe -c conda-forge --output-folder /tmp/conda-build`, then upload the resulting `.conda` file with `anaconda upload`.
 installed automatically, try updating `devtools`.)
+
+Conda users can build a local package from the recipe in
+[`conda/recipe`](conda/recipe) with `conda-build conda/recipe -c conda-forge --output-folder /tmp/conda-build`, then upload the resulting `.conda` file with `anaconda upload`.
 
 ## Examples
 

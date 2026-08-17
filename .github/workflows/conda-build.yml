@@ -1,0 +1,50 @@
+name: conda-build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    name: Build ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: linux-64
+            runner: ubuntu-latest
+          - os: osx-arm64
+            runner: macos-14
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          activate-environment: ggforestplot-build
+          channels: conda-forge
+          channel-priority: strict
+
+      - name: Install build tools
+        shell: bash -l {0}
+        run: |
+          conda install -y conda-build anaconda-client
+
+      - name: Build conda package
+        shell: bash -l {0}
+        run: |
+          conda-build conda/recipe \
+            -c conda-forge \
+            --output-folder "$GITHUB_WORKSPACE/conda-bld"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: r-ggforestplot-${{ matrix.os }}
+          path: conda-bld/**/r-ggforestplot-*.conda

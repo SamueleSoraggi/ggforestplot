@@ -16,6 +16,7 @@ library(ggforestplot)
 ```
 
 
+
 <br>
 
 <div style="text-align:left">
@@ -52,6 +53,7 @@ installed, you need to first install `devtools`):
 devtools::install_github("NightingaleHealth/ggforestplot")
 ```
 
+
 If you want display package vignettes with `utils::vignette()`, install `ggforestplot` with `devtools::install_github("NightingaleHealth/ggforestplot", build_vignettes = TRUE)`. However, installing with building the vignettes takes little bit longer. (Note: If dependencies are not installed automatically, try updating `devtools`.)
 
 ## Examples
@@ -87,6 +89,7 @@ forestplot(
   per 1-SD increment in biomarker concentration"
 )
 ```
+
 
 ### Odds ratios
 
